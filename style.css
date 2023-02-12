@@ -7,6 +7,7 @@
 }
 
 #container {
+  position: relative;
   min-height: 100vh;
   display: grid;
   place-items: center;
@@ -15,15 +16,34 @@
   border-image-repeat: round;
   border-image-slice: 33%;
 }
-#container #canvas {
+#container::after {
   position: absolute;
+  z-index: -1;
+  content: "";
+  inset: 0;
+  background-image: url(background.jpg);
+  background-size: cover;
+  filter: blur(2px) brightness(120%) contrast(115%) saturate(115%);
+  animation: move 120s linear infinite alternate;
+}
+#container #counters, #container #goodnight {
+  position: absolute;
+  left: 2vw;
+  top: 0.5vh;
+  font-size: 3vw;
+  font-style: italic;
+  letter-spacing: 1vw;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 #container #button {
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  z-index: 1;
   padding: 1vmax;
   font-family: "Satisfy", cursive;
   border-radius: 5vmax;
@@ -32,8 +52,8 @@
   letter-spacing: 1.5vw;
   /*text-shadow: 1px 0 5px 2px rgb(190, 240, 202);*/
   background-color: transparent;
-  border: 3px solid rgb(190, 240, 202);
-  filter: blur(1.5px) drop-shadow(0px 0px 5px rgb(190, 240, 202));
+  border: 5px solid rgb(190, 240, 202);
+  filter: blur(1px) drop-shadow(0px 0px 5px rgb(190, 240, 202));
   transition: 1s;
 }
 #container #button:hover {
@@ -43,31 +63,108 @@
   opacity: 0;
   visibility: hidden;
 }
+#container #goodnight {
+  font-size: 5vw;
+  background-color: transparent;
+  border: none;
+  left: 83vw;
+  text-decoration: none;
+  cursor: pointer;
+}
+#container .message {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  font-family: "Satisfy", cursive;
+  font-size: 10vw;
+  font-style: italic;
+  letter-spacing: 1.5vw;
+  text-shadow: 1px -1px 7px 4px rgb(190, 240, 202);
+}
+#container .sheep {
+  cursor: pointer;
+  border-radius: 50%;
+  width: 6vmax;
+  height: 6vmax;
+  position: absolute;
+  border: 5px solid rgb(193, 217, 198);
+  box-shadow: 0 0 5px 2px rgb(193, 217, 198);
+  background-image: url(sheep.png);
+  background-size: 135%;
+  background-position: 40% 70%;
+  filter: brightness(120%) contrast(120%) saturate(120%);
+  animation: rot 2s ease-in-out infinite alternate;
+}
 
 @media screen and (width < 600px) {
+  #container::after {
+    background-size: 100% 105%;
+    animation: move 10s linear infinite alternate;
+  }
+  #container #counters, #container #goodnight {
+    font-size: 10vw;
+  }
   #container #button {
-    cursor: pointer;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-            user-select: none;
-    z-index: 1;
-    padding: 0.5vmax 1.5vmax;
-    font-family: "Satisfy", cursive;
-    border-radius: 9vmax;
     font-size: 13vw;
-    font-style: italic;
-    letter-spacing: 3vw;
-    /*text-shadow: 1px 0 5px 2px rgb(190, 240, 202);*/
-    background-color: transparent;
-    border: 3px solid rgb(190, 240, 202);
-    filter: blur(1.5px) drop-shadow(0px 0px 5px rgb(190, 240, 202));
-    transition: 1s;
+    border-radius: 10vmax;
+    padding: 0vmax 2vmax;
   }
-  #container #button:hover {
-    filter: blur(0px) drop-shadow(0px 0px 2px rgb(190, 240, 202));
+  #container #goodnight {
+    font-size: 12vw;
+    left: 71vw;
   }
-  #container #button.clicked {
+  #container .message {
+    font-size: 13vw;
+  }
+}
+@keyframes move {
+  from {
+    background-position: bottom;
+  }
+  to {
+    background-position: top;
+  }
+}
+@keyframes rot {
+  from {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 5deg;
+  }
+  to {
+    rotate: -3deg;
+  }
+}
+@keyframes bye {
+  5% {
+    scale: 0.9;
+    opacity: 0.9;
+    translate: 8vw;
+    transform: rotateX(8deg) skewX(30deg);
+  }
+  10% {
+    scale: 0.8;
+    opacity: 0.8;
+    translate: -25vw;
+    transform: rotateY(30deg) rotateX(-8deg) skewX(-20deg) skewY(15deg);
+  }
+  40% {
+    scale: 0.6;
+    opacity: 0.6;
+    translate: 10vw;
+    transform: rotateY(2turn) rotateX(0deg) skewX(0deg) skewY(-15deg);
+  }
+  80% {
+    scale: 0.2;
+    opacity: 0.3;
+    translate: 25vw 10vh;
+    transform: rotateY(5turn) skewY(0deg);
+  }
+  100% {
+    scale: 0;
     opacity: 0;
-    visibility: hidden;
+    translate: 45vw 25vh;
+    transform: rotateY(7turn);
   }
 }/*# sourceMappingURL=style.css.map */
