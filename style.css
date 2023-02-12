@@ -12,7 +12,7 @@
   display: grid;
   place-items: center;
   border: 40px solid;
-  border-image-source: url(/flowerborder.png);
+  border-image-source: url(flowerborder.png);
   border-image-repeat: round;
   border-image-slice: 33%;
 }
